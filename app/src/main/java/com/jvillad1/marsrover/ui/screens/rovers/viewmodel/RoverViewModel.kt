@@ -3,7 +3,7 @@ package com.jvillad1.marsrover.ui.screens.rovers.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jvillad1.marsrover.data.commons.Output
-import com.jvillad1.marsrover.domain.RoversRepository
+import com.jvillad1.marsrover.domain.repository.RoversRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,10 +24,6 @@ class RoverViewModel @Inject constructor(
     private val internalEvent = Channel<RoverEvent>(Channel.BUFFERED)
     val uiEvent = internalEvent.receiveAsFlow()
 
-    init {
-        onAction(UiAction.LoadRovers)
-    }
-
     fun onAction(uiAction: UiAction) {
         when (uiAction) {
             is UiAction.LoadRovers -> getRovers()
@@ -40,7 +36,9 @@ class RoverViewModel @Inject constructor(
         when (val output = roversRepository.getRovers()) {
             is Output.Success -> {
                 internalState.value = internalState.value.copy(
-                    rovers = output.data
+                    rovers = output.data.map {
+                        it.mapToUi()
+                    }
                 )
             }
             is Output.Error -> {

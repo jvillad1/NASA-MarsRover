@@ -27,10 +27,10 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jvillad1.marsrover.R
 import com.jvillad1.marsrover.ui.components.ScreenTitleText
 import com.jvillad1.marsrover.ui.screens.rovers.viewmodel.RoverViewModel
+import com.jvillad1.marsrover.ui.screens.rovers.viewmodel.UiAction
 import com.jvillad1.marsrover.ui.theme.MarsRoverTheme
 
 @Composable
@@ -39,6 +39,8 @@ fun RoversScreen(
 ) {
     val state = viewModel.uiState.collectAsState()
     val rovers = state.value.rovers
+
+    viewModel.onAction(UiAction.LoadRovers)
 
     Scaffold() {
         Column() {
@@ -51,7 +53,7 @@ fun RoversScreen(
                     .fillMaxSize()
                     .clip(shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp)),
             ) {
-                if (rovers.isNotEmpty()) {
+                if (rovers != null && rovers.isNotEmpty()) {
                     val lazyState = rememberLazyListState()
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
@@ -82,7 +84,7 @@ fun RoversScreen(
                             }
                         }
                     }
-                } else {
+                } else if (rovers != null && rovers.isEmpty()) {
                     Text(
                         text = "No Rovers found",
                         modifier = Modifier.fillMaxSize(),

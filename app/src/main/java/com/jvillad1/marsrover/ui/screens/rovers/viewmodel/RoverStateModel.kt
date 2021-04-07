@@ -2,13 +2,13 @@ package com.jvillad1.marsrover.ui.screens.rovers.viewmodel
 
 data class RoverState(
     val isLoading: Boolean,
-    val rovers: List<RoverUI>
+    val rovers: List<RoverUI>?
 ) {
     companion object {
         @JvmStatic
         val initialState = RoverState(
             isLoading = false,
-            rovers = emptyList()
+            rovers = null
         )
     }
 }

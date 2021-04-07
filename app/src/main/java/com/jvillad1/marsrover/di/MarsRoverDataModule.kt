@@ -1,7 +1,7 @@
 package com.jvillad1.marsrover.di
 
 import com.jvillad1.marsrover.data.RoversRepositoryImpl
-import com.jvillad1.marsrover.domain.RoversRepository
+import com.jvillad1.marsrover.domain.repository.RoversRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
