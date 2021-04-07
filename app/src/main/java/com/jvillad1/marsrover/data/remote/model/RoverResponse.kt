@@ -4,6 +4,11 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
+data class RoversResponse(
+    @Json(name = "rovers") val rovers: List<RoverResponse>?,
+)
+
+@JsonClass(generateAdapter = true)
 data class RoverResponse(
     @Json(name = "id") val id: Int?,
     @Json(name = "name") val name: String?,

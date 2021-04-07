@@ -4,8 +4,8 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -65,25 +65,37 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.3.2")
+    // UI
     implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.activity:activity-compose:1.3.0-alpha05")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation("com.google.android.material:material:1.3.0")
-
+    implementation("androidx.activity:activity-compose:1.3.0-alpha05")
     implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
     implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
     implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
 
-    implementation("com.google.dagger:hilt-android:2.33-beta")
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
-    implementation("androidx.hilt:hilt-navigation-fragment:1.0.0-beta01")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    kapt("com.google.dagger:hilt-android-compiler:2.33-beta")
-    kapt("androidx.hilt:hilt-compiler:1.0.0-beta01")
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
 
+    // KTX
+    implementation("androidx.core:core-ktx:1.3.2")
+
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.33-beta")
+    implementation ("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha01")
+    kapt("com.google.dagger:hilt-compiler:2.33-beta")
+    kapt ("androidx.hilt:hilt-compiler:1.0.0-beta01")
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${rootProject.extra["compose_version"]}")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-compose:1.0.0-alpha09")
+
+    // Logging
     implementation("com.jakewharton.timber:timber:4.7.1")
 
+    // Networking
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -91,8 +103,10 @@ dependencies {
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
+    // Test
     testImplementation("junit:junit:4.13.2")
 
+    // Android Test
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["compose_version"]}")
