@@ -3,6 +3,9 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -24,6 +27,11 @@ android {
 
     buildTypes {
         all {
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://api.nasa.gov/mars-photos/api/v1/\""
+            )
             buildConfigField(
                 "String",
                 "NASA_API_KEY",
@@ -66,6 +74,22 @@ dependencies {
     implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
     implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
     implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
+
+    implementation("com.google.dagger:hilt-android:2.33-beta")
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+    implementation("androidx.hilt:hilt-navigation-fragment:1.0.0-beta01")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    kapt("com.google.dagger:hilt-android-compiler:2.33-beta")
+    kapt("androidx.hilt:hilt-compiler:1.0.0-beta01")
+
+    implementation("com.jakewharton.timber:timber:4.7.1")
+
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.moshi:moshi:1.11.0")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
     testImplementation("junit:junit:4.13.2")
 
