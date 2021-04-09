@@ -14,7 +14,7 @@ fun ScreenTitleText(title: String) {
         text = title,
         style = MaterialTheme.typography.h4,
         modifier = Modifier
-            .padding(32.dp)
+            .padding(16.dp)
             .width(240.dp)
     )
 }

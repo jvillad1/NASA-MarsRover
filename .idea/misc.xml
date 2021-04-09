@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/NASA-MarsRover/app/src/main/res/drawable/ic_baseline_calendar_today.xml" value="0.3769230769230769" />
+      </map>
+    </option>
+  </component>
   <component name="EntryPointsManager">
     <list size="4">
       <item index="0" class="java.lang.String" itemvalue="dagger.Binds" />

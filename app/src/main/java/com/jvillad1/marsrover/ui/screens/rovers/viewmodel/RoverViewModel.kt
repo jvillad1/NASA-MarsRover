@@ -18,11 +18,15 @@ class RoverViewModel @Inject constructor(
     private val roversRepository: RoversRepository
 ) : ViewModel() {
 
-    private val internalState = MutableStateFlow(RoverState.initialState)
+    private val internalState: MutableStateFlow<RoverState> = MutableStateFlow(RoverState.Loading)
     val uiState: StateFlow<RoverState> = internalState.asStateFlow()
 
     private val internalEvent = Channel<RoverEvent>(Channel.BUFFERED)
     val uiEvent = internalEvent.receiveAsFlow()
+
+    init {
+        onAction(UiAction.LoadRovers)
+    }
 
     fun onAction(uiAction: UiAction) {
         when (uiAction) {
@@ -31,21 +35,17 @@ class RoverViewModel @Inject constructor(
     }
 
     private fun getRovers() = viewModelScope.launch {
-        internalState.value = internalState.value.copy(isLoading = true)
-
         when (val output = roversRepository.getRovers()) {
             is Output.Success -> {
-                internalState.value = internalState.value.copy(
-                    rovers = output.data.map {
+                internalState.value = RoverState.Success(
+                    roversList = output.data.map {
                         it.mapToUi()
                     }
                 )
             }
             is Output.Error -> {
-                internalEvent.send(RoverEvent.RoversError)
+                internalState.value = RoverState.Error
             }
         }
-
-        internalState.value = internalState.value.copy(isLoading = false)
     }
 }
