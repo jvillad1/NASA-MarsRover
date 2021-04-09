@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jvillad1.marsrover.data.commons.Output
 import com.jvillad1.marsrover.domain.repository.RoversRepository
+import com.jvillad1.marsrover.ui.screens.roverdetails.viewmodel.mapToUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

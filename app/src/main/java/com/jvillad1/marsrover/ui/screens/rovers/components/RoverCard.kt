@@ -24,14 +24,18 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import com.jvillad1.marsrover.R
-import com.jvillad1.marsrover.ui.screens.rovers.viewmodel.RoverUI
+import com.jvillad1.marsrover.ui.screens.roverdetails.viewmodel.RoverDetailUI
 import com.jvillad1.marsrover.ui.theme.MarsRoverTheme
 
 @Composable
 fun RoverCard(
+    navController: NavHostController,
     modifier: Modifier = Modifier,
-    rover: RoverUI
+    rover: RoverDetailUI
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
@@ -47,7 +51,11 @@ fun RoverCard(
                 Box(
                     Modifier.clickable(
                         onClick = {
-                            // TODO
+                            navController.currentBackStackEntry?.arguments?.putParcelable(
+                                "rover",
+                                rover
+                            )
+                            navController.navigate("RoverDetails")
                         })
                 ) {
                     Text(
@@ -84,9 +92,16 @@ fun RoverCard(
 fun RoverCardPreview() {
     MarsRoverTheme() {
         RoverCard(
-            rover = RoverUI(
+            rememberNavController(),
+            rover = RoverDetailUI(
+                id = 1,
                 name = "Curiosity",
+                landingDate = "",
                 launchDate = "2021-04-06",
+                status = "",
+                maxSol = 0,
+                total_photos = 0,
+                cameras = emptyList(),
             )
         )
     }
