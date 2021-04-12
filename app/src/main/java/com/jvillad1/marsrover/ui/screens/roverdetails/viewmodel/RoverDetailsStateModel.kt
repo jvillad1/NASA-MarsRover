@@ -1,6 +1,7 @@
-package com.jvillad1.marsrover.ui.screens.rovers.viewmodel
+package com.jvillad1.marsrover.ui.screens.roverdetails.viewmodel
 
 import com.jvillad1.marsrover.ui.model.RoverUI
+
 
 sealed class RoverState {
     object Loading: RoverState()

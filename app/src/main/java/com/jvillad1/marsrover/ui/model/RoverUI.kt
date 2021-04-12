@@ -1,4 +1,4 @@
-package com.jvillad1.marsrover.ui.screens.roverdetails.viewmodel
+package com.jvillad1.marsrover.ui.model
 
 import android.os.Parcelable
 import com.jvillad1.marsrover.domain.model.Camera
@@ -6,7 +6,7 @@ import com.jvillad1.marsrover.domain.model.Rover
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class RoverDetailUI(
+data class RoverUI(
     val id: Int,
     val name: String,
     val landingDate: String,
@@ -17,7 +17,7 @@ data class RoverDetailUI(
     val cameras: List<CameraUI>,
 ) : Parcelable
 
-fun Rover.mapToUi() = RoverDetailUI(
+fun Rover.mapToUi() = RoverUI(
     id = id,
     name = name,
     landingDate = landingDate,

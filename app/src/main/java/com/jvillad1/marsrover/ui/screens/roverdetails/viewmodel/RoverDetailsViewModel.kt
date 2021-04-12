@@ -1,4 +1,4 @@
-package com.jvillad1.marsrover.ui.screens.rovers.viewmodel
+package com.jvillad1.marsrover.ui.screens.roverdetails.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RoverViewModel @Inject constructor(
+class RoverDetailsViewModel @Inject constructor(
     private val roversRepository: RoversRepository
 ) : ViewModel() {
 

@@ -1,30 +1,26 @@
 package com.jvillad1.marsrover.ui.screens.rovers.components
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import com.jvillad1.marsrover.ui.screens.roverdetails.viewmodel.RoverDetailUI
+import com.jvillad1.marsrover.ui.components.VerticalGrid
+import com.jvillad1.marsrover.ui.model.RoverUI
 
 @Composable
 fun RoversCardList(
-    navController: NavHostController,
-    roverList: List<RoverDetailUI>
+    roverList: List<RoverUI>,
+    onRoverClick: (Int) -> Unit
 ) {
-    LazyColumn {
-        itemsIndexed(items = roverList, itemContent = { index, item ->
-            RoverCard(
-                navController = navController,
-                modifier = if (index == 0) {
-                    Modifier.padding(top = 8.dp)
-                } else {
-                    Modifier.padding(top = 16.dp)
-                },
-                rover = item
-            )
-        })
+    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+        VerticalGrid(columns = 4) {
+            roverList.forEach { item ->
+                RoverCard(
+                    rover = item,
+                    onRoverClick = onRoverClick
+                )
+            }
+        }
     }
 }

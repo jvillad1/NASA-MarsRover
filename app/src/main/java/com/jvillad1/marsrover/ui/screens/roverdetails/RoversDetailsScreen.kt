@@ -1,19 +1,16 @@
 package com.jvillad1.marsrover.ui.screens.roverdetails
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.jvillad1.marsrover.ui.components.ScreenTitleText
-import com.jvillad1.marsrover.ui.screens.roverdetails.viewmodel.RoverDetailUI
+import com.jvillad1.marsrover.ui.model.CameraUI
+import com.jvillad1.marsrover.ui.screens.roverdetails.viewmodel.RoverDetailsViewModel
 
 @Composable
 fun RoverDetailsScreen(
-    rover: RoverDetailUI
+    roverDetailsViewModel: RoverDetailsViewModel,
+    selectCamera: (CameraUI) -> Unit,
 ) {
-    ScreenTitleText(title = rover.name)
-    Spacer(modifier = Modifier.height(16.dp))
+//    ScreenTitleText(title = rover.name)
+//    Spacer(modifier = Modifier.height(16.dp))
 
 
 }
