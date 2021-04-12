@@ -21,9 +21,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -42,10 +41,10 @@ import timber.log.Timber
 @Composable
 fun RoversScreen(
     roverViewModel: RoverViewModel,
+    launchAnimationState: MutableState<Boolean>,
     onRoverClick: (Int) -> Unit
 ) {
     val roverState = roverViewModel.uiState.collectAsState().value
-    val animationState = remember { mutableStateOf(true) }
 
     BoxWithConstraints(
         modifier = Modifier
@@ -53,7 +52,7 @@ fun RoversScreen(
             .background(Color.Black)
     ) {
         AnimatedVisibility(
-            visible = !animationState.value,
+            visible = !launchAnimationState.value,
             enter = fadeIn()
         ) {
             Column(
@@ -88,11 +87,11 @@ fun RoversScreen(
         }
 
         MarsAnimation(
-            isFirstLaunch = animationState.value,
+            isFirstLaunch = launchAnimationState.value,
             maxWidth = maxWidth,
             maxHeight = maxHeight
         ) {
-            animationState.value = false
+            launchAnimationState.value = false
         }
     }
 }

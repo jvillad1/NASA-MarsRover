@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import com.google.accompanist.insets.ProvideWindowInsets
+import com.jvillad1.marsrover.ui.navigation.NavGraph
 import com.jvillad1.marsrover.ui.theme.MarsRoverTheme
 import dagger.hilt.android.AndroidEntryPoint
 
