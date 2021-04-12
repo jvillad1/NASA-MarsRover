@@ -36,6 +36,7 @@ import com.jvillad1.marsrover.ui.screens.rovers.components.RoversCardList
 import com.jvillad1.marsrover.ui.screens.rovers.viewmodel.RoverState
 import com.jvillad1.marsrover.ui.screens.rovers.viewmodel.RoverViewModel
 import timber.log.Timber
+import java.util.*
 
 @ExperimentalAnimationApi
 @Composable
@@ -61,7 +62,7 @@ fun RoversScreen(
                     .padding(16.dp)
             ) {
                 ScreenTitleText(
-                    title = stringResource(id = R.string.rovers_title),
+                    title = stringResource(id = R.string.rovers_title).toUpperCase(Locale.US),
                     style = MaterialTheme.typography.h5
                 )
 

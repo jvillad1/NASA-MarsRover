@@ -2,6 +2,7 @@ package com.jvillad1.marsrover.ui.screens.rovers.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -26,62 +27,50 @@ import androidx.compose.ui.unit.dp
 import com.jvillad1.marsrover.R
 import com.jvillad1.marsrover.ui.model.RoverUI
 import com.jvillad1.marsrover.ui.theme.MarsRoverTheme
-import com.jvillad1.marsrover.ui.theme.RoverGradient
+import com.jvillad1.marsrover.ui.theme.NasaGradient
 
 @Composable
 fun RoverCard(
     rover: RoverUI,
     onRoverClick: (Int) -> Unit = {}
 ) {
-    val imageModifier = if (rover.id == 1) {
-        Modifier
-            .padding(start = 8.dp, end = 8.dp, top = 8.dp)
-            .height(60.dp)
-            .width(60.dp)
-            .clip(CircleShape)
-            .border(
-                shape = CircleShape,
-                border = BorderStroke(
-                    width = 3.dp,
-                    color = Color.LightGray
-                )
-            )
-    } else {
-        Modifier
-            .padding(start = 8.dp, end = 8.dp, top = 8.dp)
-            .height(60.dp)
-            .width(60.dp)
-            .clip(CircleShape)
-            .border(
-                shape = CircleShape,
-                border = BorderStroke(
-                    width = 3.dp,
-                    brush = Brush.linearGradient(
-                        colors = RoverGradient,
-                        start = Offset(
-                            0f,
-                            0f
-                        ),
-                        end = Offset(
-                            100f,
-                            100f
-                        )
+    val imageModifier = Modifier
+        .padding(start = 8.dp, end = 8.dp, top = 8.dp)
+        .height(60.dp)
+        .width(60.dp)
+        .clip(CircleShape)
+        .background(color = Color.White)
+        .border(
+            shape = CircleShape,
+            border = BorderStroke(
+                width = 3.dp,
+                brush = Brush.linearGradient(
+                    colors = NasaGradient,
+                    start = Offset(
+                        0f,
+                        0f
+                    ),
+                    end = Offset(
+                        100f,
+                        100f
                     )
                 )
             )
-    }
+        )
+        .padding(16.dp)
 
     Column(
-        modifier = Modifier.clickable {
-            onRoverClick(rover.id)
-        },
+        modifier = Modifier
+            .clickable {
+                onRoverClick(rover.id)
+            },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(R.drawable.mars_globe),
-            contentScale = ContentScale.Crop,
+            painter = painterResource(R.drawable.ic_rover),
             contentDescription = null,
-            modifier = imageModifier
+            modifier = imageModifier,
+            contentScale = ContentScale.Crop,
         )
         Text(
             text = rover.name,
